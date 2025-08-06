@@ -25,25 +25,54 @@
       <h1 class="mb-5">Stimulus JS ⚡️</h1>
 
       <div class="row">
-        <div class="col-12 pt-1">
-          <button id="clickme" class="btn btn-primary btn-lg">Click me!</button>
-          <button id="reset" class="btn btn-outline-primary d-none">
+        <!-- data-controller="controller-name" -->
+        <div class="col-12 pt-1" data-controller="disable-button">
+          <!-- data-controller-name-target="target-name" -->
+          <!-- data-action="event->controller-name#method-name" -->
+          <button
+            data-action="click->disable-button#disable"
+            data-disable-button-target="clickme"
+            id="clickme"
+            class="btn btn-primary btn-lg"
+          >
+            Click me!
+          </button>
+          <button
+            data-action="click->disable-button#enable"
+            data-disable-button-target="reset"
+            id="reset"
+            class="btn btn-outline-primary d-none"
+          >
             Reset
           </button>
         </div>
       </div>
 
-      <div class="col-12 d-none">
-        <form class="row g-2 justify-content-center py-5">
+      <div class="col-12" data-controller="movies">
+        <!-- data-action="event->controller-name#method-name" -->
+        <form
+          data-action="submit->movies#search"
+          class="row g-2 justify-content-center py-5"
+        >
           <div class="col-4">
-            <input type="text" class="form-control" />
+            <!-- data-controller-name-target="name-target" -->
+            <input
+              data-movies-target="input"
+              type="text"
+              class="form-control"
+            />
           </div>
-          <div class="col-1">
-            <input type="submit" class="btn btn-primary" />
+          <div class="col-1" data-controller="disable-button">
+            <input
+              type="submit"
+              class="btn btn-primary"
+              data-action="click->disable-button#disable"
+              data-disable-button-target="clickme"
+            />
           </div>
         </form>
 
-        <ul class="list-group list-group-vertical">
+        <ul class="list-group list-group-vertical" data-movies-target="list">
           <!-- the movie cards here! -->
         </ul>
       </div>
